@@ -2,7 +2,7 @@
 
 Bem-vindo ao repositório do meu portfólio pessoal. Aqui organizo e documento toda a minha trajetória educacional, as minhas conquistas académicas e o desenvolvimento das minhas competências na área de tecnologia.
 
-## Para mais informações minhas, acesse o Github Pages:  [https://enzogurgel.github.io/GitHubIntermediario/](https://enzogurgel.github.io/GitHubIntermediario/academic-trajectory/)
+## Para mais informações minhas, acesse o Github Pages:  https://enzogurgel.github.io/GitHubProjetos/
 ---
 
 ## 🧑‍💻 Sobre Mim
