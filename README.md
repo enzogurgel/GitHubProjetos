@@ -42,15 +42,6 @@ Ao longo do meu percurso, participei ativamente em competições nacionais de co
 
 ---
 
-## 🛠️ Organização do Repositório
-
-Para garantir as boas práticas de documentação, este repositório está estruturado da seguinte forma:
-
-* `/academic-trajectory`: Projetos, códigos de disciplinas e relatórios desenvolvidos durante a faculdade.
-* `/knowledge-olympiads`: Arquivos, resoluções de problemas e registos relacionados com as olimpíadas científicas.
-
----
-
 ## ✉️ Vamos conversar?
 
 Estou sempre aberto a novas oportunidades de projetos académicos, conexões profissionais e desafios na área de tecnologia.
