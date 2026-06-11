@@ -3,6 +3,7 @@
 Bem-vindo ao repositório do meu portfólio pessoal. Aqui organizo e documento toda a minha trajetória educacional, as minhas conquistas académicas e o desenvolvimento das minhas competências na área de tecnologia.
 
 ## Para mais informações minhas, acesse o Github Pages:  https://enzogurgel.github.io/GitHubProjetos/
+## Para acessar o plano de implantação, acesse o documento: https://docs.google.com/document/d/1ugrXELK4rfHtsMxepwCCVs8Lu21BmQszPyS5_-4tz6g/edit?usp=sharing
 ---
 
 ## 🧑‍💻 Sobre Mim
@@ -48,4 +49,4 @@ Estou sempre aberto a novas oportunidades de projetos académicos, conexões pro
 
 * **E-mail:** enzo.gurgel@sempreceub.com
 * **Contacto:** +55 (61) 98122-4804
-### ⚠️ Importante: texto feito com auxílio de Inteligência Artificial, mas utiliza apenas dados verídicos sobre mim.
+### ⚠️ Importante: texto feito com auxílio de Inteligência Artificial Generativa, mas utiliza apenas dados verídicos sobre mim.
