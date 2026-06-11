@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enzo Gurgel — Desenvolvedor em Formação</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0c10;
+      --surface: #12141a;
+      --border: #1e2130;
+      --accent: #64ffda;
+      --accent2: #7b61ff;
+      --text: #cdd6f4;
+      --muted: #6c7086;
+      --white: #e8eaf0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ── GRID BG ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(100,255,218,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,255,218,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── GLOW BLOB ── */
+    .glow-blob {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,97,255,0.12) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      pointer-events: none;
+      z-index: 0;
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 40px) scale(1.05); }
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+    }
+
+    /* ── HEADER ── */
+    .header { margin-bottom: 72px; }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(100,255,218,0.3);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(42px, 8vw, 80px);
+      line-height: 1;
+      color: var(--white);
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+      animation: fadeUp 0.7s ease both;
+      animation-delay: 0.1s;
+    }
+
+    .name span {
+      color: var(--accent);
+      position: relative;
+    }
+
+    .role {
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 36px;
+      animation: fadeUp 0.7s ease both;
+      animation-delay: 0.2s;
+    }
+
+    .role .highlight {
+      color: var(--accent2);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 64px;
+      position: relative;
+      animation: fadeUp 0.7s ease both;
+      animation-delay: 0.3s;
+      overflow: hidden;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    }
+
+    .about-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .about-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .about p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    .about p + p { margin-top: 14px; }
+
+    /* ── LINKS SECTION ── */
+    .links-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      animation: fadeUp 0.7s ease both;
+      animation-delay: 0.4s;
+    }
+
+    .links-grid {
+      display: grid;
+      gap: 16px;
+      animation: fadeUp 0.7s ease both;
+      animation-delay: 0.5s;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(100,255,218,0.04), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .link-card:hover::before { opacity: 1; }
+
+    .link-card:hover {
+      border-color: rgba(100,255,218,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(100,255,218,0.1);
+    }
+
+    .link-card:nth-child(2):hover {
+      border-color: rgba(123,97,255,0.3);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(123,97,255,0.1);
+    }
+
+    .link-card:nth-child(3):hover {
+      border-color: rgba(100,200,255,0.3);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(100,200,255,0.1);
+    }
+
+    .link-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 22px;
+    }
+
+    .link-icon.linkedin { background: rgba(10,102,194,0.18); }
+    .link-icon.slides   { background: rgba(123,97,255,0.18); }
+    .link-icon.portfolio { background: rgba(100,200,255,0.18); }
+    .link-icon.curriculum { background: rgba(100,255,180,0.18); }
+    .link-icon.github   { background: rgba(200,200,200,0.12); }
+
+    .link-info { flex: 1; }
+
+    .link-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .link-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .link-arrow {
+      font-size: 18px;
+      color: var(--muted);
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .link-card:hover .link-arrow {
+      color: var(--accent);
+      transform: translate(4px, -4px);
+    }
+
+    .link-card:nth-child(2):hover .link-arrow { color: var(--accent2); }
+    .link-card:nth-child(3):hover .link-arrow { color: #64c8ff; }
+
+    /* ── CONTACTS FOOTER ── */
+    .contacts {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      animation: fadeUp 0.7s ease both;
+      animation-delay: 0.7s;
+    }
+
+    .contacts-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      width: 100%;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.25s;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(100,255,218,0.05);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 520px) {
+      .container { padding: 48px 20px 80px; }
+      .link-card { padding: 18px 20px; }
+      .link-desc { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-blob"></div>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="tag">// disponível para oportunidades</div>
+      <h1 class="name">Enzo <span>Gurgel</span></h1>
+      <p class="role">
+        Desenvolvedor em Formação &nbsp;·&nbsp;
+        <span class="highlight">ADS @ UniCEUB</span>
+      </p>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="about">
+      <div class="about-label">sobre mim</div>
+      <p>
+        Olá! Sou Enzo Marques Montenegro Gurgel, 17 anos, estudante do 1º semestre de
+        <strong>Análise e Desenvolvimento de Sistemas</strong> na UniCEUB — Brasília, DF.
+      </p>
+      <p>
+        Minha paixão por tecnologia nasceu dos jogos, que desafiaram minha lógica e moldaram
+        meu raciocínio. Fora do código, fui atleta de voleibol — escola de trabalho em equipe
+        que carrego para todo projeto em que participo.
+      </p>
+    </section>
+
+    <!-- LINKS -->
+    <p class="links-title">// acesse meus links</p>
+    <div class="links-grid">
+
+      <a class="link-card" href="https://www.linkedin.com/in/enzo-gurgel-92b58540a/" target="_blank" rel="noopener">
+        <div class="link-icon linkedin">💼</div>
+        <div class="link-info">
+          <div class="link-name">LinkedIn</div>
+          <div class="link-desc">Perfil profissional e conexões</div>
+        </div>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-card" href="https://docs.google.com/presentation/d/1RvfrIK_j4m-0D-qxsG-iceXwe8kClKXIHKSN-D4r-00/edit?usp=sharing" target="_blank" rel="noopener">
+        <div class="link-icon slides">📊</div>
+        <div class="link-info">
+          <div class="link-name">Apresentação</div>
+          <div class="link-desc">Slides com meus projetos e trajetória</div>
+        </div>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-card" href="https://sites.google.com/view/portifolioenzogurgel/início?authuser=0" target="_blank" rel="noopener">
+        <div class="link-icon portfolio">🌐</div>
+        <div class="link-info">
+          <div class="link-name">Portfólio</div>
+          <div class="link-desc">Formação, conquistas e projetos</div>
+        </div>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-card" href="https://docs.google.com/document/d/1ugrXELK4rfHtsMxepwCCVs8Lu21BmQszPyS5_-4tz6g/edit?usp=sharing" target="_blank" rel="noopener">
+        <div class="link-icon curriculum">📄</div>
+        <div class="link-info">
+          <div class="link-name">Plano de Implantação</div>
+          <div class="link-desc">Estratégia e etapas do projeto</div>
+        </div>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-card" href="https://github.com/enzogurgel" target="_blank" rel="noopener">
+        <div class="link-icon github">🐙</div>
+        <div class="link-info">
+          <div class="link-name">GitHub</div>
+          <div class="link-desc">Retornar ao GitHub</div>
+        </div>
+        <span class="link-arrow">↗</span>
+      </a>
+
+    </div>
+
+    <!-- CONTACTS -->
+    <footer class="contacts">
+      <span class="contacts-label">contato direto</span>
+      <a class="contact-item" href="tel:+5561981226604">
+        📱 +55 (61) 98122-6604
+      </a>
+      <a class="contact-item" href="mailto:enzo.gurgel@sempreceub.com">
+        ✉️ enzo.gurgel@sempreceub.com
+      </a>
+    </footer>
+
+  </div>
+</body>
+</html>
